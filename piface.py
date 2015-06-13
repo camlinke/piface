@@ -3,6 +3,7 @@ from picamera.array import PiRGBArray
 from picamera import PiCamera
 import time
 import cv2
+import sys
  
 # initialize the camera and grab a reference to the raw camera capture
 camera = PiCamera()
@@ -12,6 +13,9 @@ rawCapture = PiRGBArray(camera, size=(640, 480))
  
 # allow the camera to warmup
 time.sleep(0.1)
+
+cascPath = sys.argv[1]
+faceCascade = cv2.CascadeClassifier(cascPath)
  
 # capture frames from the camera
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
