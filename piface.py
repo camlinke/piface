@@ -26,6 +26,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
  
     # show the frame
     key = cv2.waitKey(1) & 0xFF
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     faces = faceCascade.detectMultiScale(
         gray,
