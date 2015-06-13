@@ -26,7 +26,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
  
     # show the frame
     key = cv2.waitKey(1) & 0xFF
-    gray = cv2.cvtColor(frame.array, cv2.COLOR_BGR2GRAY)
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     faces = faceCascade.detectMultiScale(
         gray,
@@ -39,10 +39,10 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     # Draw a rectangle around the faces
     for (x, y, w, h) in faces:
         print faces
-        cv2.rectangle(frame.array, (x, y), (x+w, y+h), (0, 255, 0), 2)
+        cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
     # show the frame
-    cv2.imshow("Frame", image)
+    # cv2.imshow("Frame", image)
 
  
     # clear the stream in preparation for the next frame
