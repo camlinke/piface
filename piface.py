@@ -17,12 +17,28 @@ time.sleep(0.1)
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     # grab the raw NumPy array representing the image, then initialize the timestamp
     # and occupied/unoccupied text
-    print frame
+
     image = frame.array
  
     # show the frame
-    cv2.imshow("Frame", image)
     key = cv2.waitKey(1) & 0xFF
+
+    faces = faceCascade.detectMultiScale(
+        gray,
+        scaleFactor=1.1,
+        minNeighbors=5,
+        minSize=(30, 30),
+        flags=cv2.cv.CV_HAAR_SCALE_IMAGE
+    )
+
+    # Draw a rectangle around the faces
+    for (x, y, w, h) in faces:
+        print faces
+        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+
+    # show the frame
+    cv2.imshow("Frame", image)
+
  
     # clear the stream in preparation for the next frame
     rawCapture.truncate(0)
